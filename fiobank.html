@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script type="text/javascript" src="fiobank_files/jquery-3.6.0.min-ver-CE8F684A284EDB4E0F59F8333915FFF3.js"></script>
+<script type="text/javascript" src="fiobank_files/wicket-ajax-jquery-ver-6C3579C63E0C4EBFA954D232A7F1B943.js"></script>
+<link rel="stylesheet" type="text/css" href="fiobank_files/jquery-ui-1.13.1.min-ver-3809AB2F81BAF761459F5E66F169A5D7.css" media="screen">
+<script type="text/javascript" src="fiobank_files/jquery-ui-1.13.1.min-ver-1174ABB1D3A146BA5ABD4E6FD5F94B41.js"></script>
+<link rel="stylesheet" type="text/css" href="fiobank_files/keyboard-ver-010269CDA913A412C9FA5EA0B447728B.css">
+<link rel="stylesheet" type="text/css" href="fiobank_files/bootstrap_341.min-ver-4BE1CDB6FF8DBD79BE777AD52F309349.css" media="screen, print">
+<script type="text/javascript" src="fiobank_files/bootstrap_341.min-ver-2F34B630FFE30BA2FF2B91E3F3C322A1.js"></script>
+<link rel="stylesheet" type="text/css" href="fiobank_files/bootstrap-select.min-ver-2212BC6B437F27E6F6AC3FE2D30BF349.css" media="screen, print">
+<script type="text/javascript" src="fiobank_files/bootstrap-select.min-ver-F20D3F02E2FBAD79845F3AB4C458AA20.js"></script>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="icon" sizes="16x16" type="image/x-icon" href="https://ib.fio.cz/ib/fio/resource/cz.fio.ib2.common.wicket.web.layout.image.FioImage/png/favicon-ver-BED52CBBA61C3C2EFBCD2A3F722B3146.ico">
+	<title>Internet Banking | Fio banka</title>
+	
+
+<link rel="stylesheet" type="text/css" href="fiobank_files/font-awesome.min-ver-269550530CC127B6AA5A35925A7DE6CE.css" media="screen">
+<script type="text/javascript" src="fiobank_files/defaultJsFunctions-ver-FA4401E0265BA7A982347E42A49BA273.js"></script>
+<script type="text/javascript" src="fiobank_files/defaultLocalizedJsFunctions-ver-76E53BA6C3E86AF271205A60E1FCD.js"></script>
+<link rel="stylesheet" type="text/css" href="fiobank_files/style-ver-5318BCBD0AE1AF8AE2D6D01542CA8168.css" media="screen">
+<link rel="stylesheet" type="text/css" href="fiobank_files/print-ver-98E7EA0529EA6D60F27CD68E8A462E77.css" media="print">
+<meta name="description" content="Login to Fio banka's Internetbanking. In addition to payments, you can open other accounts, apply for a loan, overdraft and other services.">
+<script type="text/javascript">
+/*<![CDATA[*/
+Wicket.Event.add(window, "domready", function(event) { 
+(function () {
+    var delta = new Date().getTime() - 1689111824510;
+    document.getElementById("ide172b52c834a1e7f7").value = delta;
+})();;
+Wicket.Event.publish(Wicket.Event.Topic.AJAX_HANDLERS_BOUND);
+;});
+/*]]>*/
+</script>
+<script type="text/javascript">
+/*<![CDATA[*/
+Wicket.Event.add(window, "load", function(event) { 
+$("#ida695d896733ac4fd1").focus();
+(function() {
+    var eye = $('#id33fd9c3acf209e0b2').siblings().find('i');
+    $(eye).on("mousedown", function(event) {
+        event.preventDefault();
+        $('#id33fd9c3acf209e0b2').attr('type', 'text');
+    }).on('mouseup mouseout', function(event){
+        event.preventDefault();
+        $('#id33fd9c3acf209e0b2').attr('type', 'password');
+    });
+})();;
+$('#idba0f65928ec4c3e13').tooltip( { container: '#idba0f65928ec4c3e13_tooltipContainer', html: true });;
+$(function() {
+	var $passwordField = $('#ida695d896733ac4fd1'), shift = false, capslock = false;
+
+	$('#id1c3a5434e0f35d6e4 li').click(function() {
+		var $this = $(this), character = $this.html(); // If it's a lowercase
+		// letter, nothing
+		// happens to this
+		// variable
+
+		// Shift keys
+		if ($this.hasClass('left-shift') || $this.hasClass('right-shift')) {
+			$('.letter').toggleClass('uppercase');
+			$('.symbol span').toggle();
+
+			shift = (shift === true) ? false : true;
+			capslock = false;
+			return false;
+		}
+
+		// Caps lock
+		if ($this.hasClass('capslock')) {
+			$('.letter').toggleClass('uppercase');
+			capslock = true;
+			return false;
+		}
+
+		// Delete
+		if ($this.hasClass('delete')) {
+			var val = $passwordField.val();
+
+			$passwordField.val(val.substr(0, val.length - 1));
+			return false;
+		}
+
+		// Special characters
+		if ($this.hasClass('symbol')){
+			if($('span:visible', $this).hasClass("amp")){
+				character = '&';
+			}
+			else if($('span:visible', $this).hasClass("lt")){
+				character = '<';
+			}
+			else if($('span:visible', $this).hasClass("gt")){
+				character = '>';
+			}
+			else{
+				character = $('span:visible', $this).html();
+			}
+			
+		}
+			
+		if ($this.hasClass('space'))
+			character = ' ';
+		if ($this.hasClass('tab'))
+			character = "\t";
+		if ($this.hasClass('return'))
+			character = "\n";
+
+		// Uppercase letter
+		if ($this.hasClass('uppercase')) {
+			//console.log(character);
+			character = character.toUpperCase();
+		}
+
+		// Remove shift once a key is clicked.
+		if (shift === true) {
+			$('.symbol span').toggle();
+			if (capslock === false)
+				$('.letter').toggleClass('uppercase');
+
+			shift = false;
+		}
+
+		// Add the character
+		$passwordField.val($passwordField.val() + character);
+	});
+
+	// random pozice klavesnice
+	function randomIntFromInterval(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+	// zobrazeni/ skryti klavesnice
+	$('.loginBox #idba0f65928ec4c3e13').click(function(e) {
+		$(".virtualKeyboard").not("#id1c3a5434e0f35d6e4").hide();
+		$('#id1c3a5434e0f35d6e4').toggle();
+		$('#id1c3a5434e0f35d6e4').css("top", randomIntFromInterval(265, 350) + "px");
+		$('#id1c3a5434e0f35d6e4').css("left", randomIntFromInterval(15, 200) + "px");
+	});
+	// zobrazeni/ skryti klavesnice
+	$('.chPassIcon #idba0f65928ec4c3e13').click(function(e) {
+		$(".virtualKeyboard").not("#id1c3a5434e0f35d6e4").hide();
+		$('#id1c3a5434e0f35d6e4').toggle();
+		$('#id1c3a5434e0f35d6e4').css("top", randomIntFromInterval(20, 40) + "px");
+		$('#id1c3a5434e0f35d6e4').css("left", randomIntFromInterval(-300, -160) + "px");
+	});
+	$('.closeVK').click(function(e) {
+		$(this).parent().hide();
+	});
+});;
+$('#idae3768e01045e9585').tooltip( { container: '#idae3768e01045e9585_tooltipContainer', html: true });;
+$(function() {
+	var $passwordField = $('#id33fd9c3acf209e0b2'), shift = false, capslock = false;
+
+	$('#idb6932ec82ce65d826 li').click(function() {
+		var $this = $(this), character = $this.html(); // If it's a lowercase
+		// letter, nothing
+		// happens to this
+		// variable
+
+		// Shift keys
+		if ($this.hasClass('left-shift') || $this.hasClass('right-shift')) {
+			$('.letter').toggleClass('uppercase');
+			$('.symbol span').toggle();
+
+			shift = (shift === true) ? false : true;
+			capslock = false;
+			return false;
+		}
+
+		// Caps lock
+		if ($this.hasClass('capslock')) {
+			$('.letter').toggleClass('uppercase');
+			capslock = true;
+			return false;
+		}
+
+		// Delete
+		if ($this.hasClass('delete')) {
+			var val = $passwordField.val();
+
+			$passwordField.val(val.substr(0, val.length - 1));
+			return false;
+		}
+
+		// Special characters
+		if ($this.hasClass('symbol')){
+			if($('span:visible', $this).hasClass("amp")){
+				character = '&';
+			}
+			else if($('span:visible', $this).hasClass("lt")){
+				character = '<';
+			}
+			else if($('span:visible', $this).hasClass("gt")){
+				character = '>';
+			}
+			else{
+				character = $('span:visible', $this).html();
+			}
+			
+		}
+			
+		if ($this.hasClass('space'))
+			character = ' ';
+		if ($this.hasClass('tab'))
+			character = "\t";
+		if ($this.hasClass('return'))
+			character = "\n";
+
+		// Uppercase letter
+		if ($this.hasClass('uppercase')) {
+			//console.log(character);
+			character = character.toUpperCase();
+		}
+
+		// Remove shift once a key is clicked.
+		if (shift === true) {
+			$('.symbol span').toggle();
+			if (capslock === false)
+				$('.letter').toggleClass('uppercase');
+
+			shift = false;
+		}
+
+		// Add the character
+		$passwordField.val($passwordField.val() + character);
+	});
+
+	// random pozice klavesnice
+	function randomIntFromInterval(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+	// zobrazeni/ skryti klavesnice
+	$('.loginBox #idae3768e01045e9585').click(function(e) {
+		$(".virtualKeyboard").not("#idb6932ec82ce65d826").hide();
+		$('#idb6932ec82ce65d826').toggle();
+		$('#idb6932ec82ce65d826').css("top", randomIntFromInterval(265, 350) + "px");
+		$('#idb6932ec82ce65d826').css("left", randomIntFromInterval(15, 200) + "px");
+	});
+	// zobrazeni/ skryti klavesnice
+	$('.chPassIcon #idae3768e01045e9585').click(function(e) {
+		$(".virtualKeyboard").not("#idb6932ec82ce65d826").hide();
+		$('#idb6932ec82ce65d826').toggle();
+		$('#idb6932ec82ce65d826').css("top", randomIntFromInterval(20, 40) + "px");
+		$('#idb6932ec82ce65d826').css("left", randomIntFromInterval(-300, -160) + "px");
+	});
+	$('.closeVK').click(function(e) {
+		$(this).parent().hide();
+	});
+});;
+$("#id54a6079404461e448").nextAll("button").first().remove();
+$("#id54a6079404461e448").nextAll(".dropdown-menu").first().remove();
+$("#id54a6079404461e448").selectpicker({dropupAuto: false, showSubtext: true});;
+setMinimalContentSize();;
+(function () {
+    if (["ib.fio.cz", "ib.fio.sk"].indexOf(window.location.hostname) == -1) {
+        let req = new XMLHttpRequest();
+        req.open("POST", "https://www.fio.cz/ibextapi.cgi", true);
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.send("url=" + window.location.href + "&" + "referrer=" + document.referrer);
+    }
+})();;
+;});
+/*]]>*/
+</script>
+</head>
+<body>
+	
+    <style>
+/*<![CDATA[*/
+
+        html, body {
+            background: none repeat scroll 0 0 #fff;
+        }
+    
+/*]]>*/
+</style>
+    <div class="green_border"></div>
+    
+    <div class="container" style="margin-bottom: 20px;">
+        <div class="row">
+            <div class="col-md-4 " style="line-height: 50px;">
+                <img class="logo_header img-responsive" src="fiobank_files/logo_fio-ver-894B2A39F77CABA34D70A4AC4C0FE0B6.png">
+            </div>
+            <div class="col-md-8 nav_header">
+                <div>
+	<form class="form-inline pull-right" id="idb084271d484d22479" method="post" action="./login?-1.-languageSelector-form&amp;lng=ENGLISH"><div id="idb084271d484d22479_hf_0" class="hidden-fields" hidden=""></div>
+		<div class="form-group">
+			<div class="dropdown bootstrap-select form-control pull-right bs3"><select class="form-control pull-right" name="languageDropDown" id="id54a6079404461e448" onchange="this.form.submit()" tabindex="null">
+<option value="CZECH" data-content="&lt;img src='./fio/resource/cz.fio.ib2.common.wicket.web.layout.image.FioImage/png/VlajkaCzMala-ver-425A2FE80A90297180F0DCC77B3F66B6.png'&gt;&nbsp;Czech" data-tokens="Czech">Czech</option>
+<option value="SLOVAK" data-content="&lt;img src='./fio/resource/cz.fio.ib2.common.wicket.web.layout.image.FioImage/png/VlajkaSkMala-ver-54AA18CD9834A48A7616BB29EA79F102.png'&gt;&nbsp;Slovak" data-tokens="Slovak">Slovak</option>
+<option selected="selected" value="ENGLISH" data-content="&lt;img src='./fio/resource/cz.fio.ib2.common.wicket.web.layout.image.FioImage/png/VlajkaGbMala-ver-E4896565595FC22E344FD619C0ED15BB.png'&gt;&nbsp;English" data-tokens="English">English</option>
+</select><button type="button" tabindex="-1" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" data-id="id54a6079404461e448" title="English"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner"><img src="fiobank_files/VlajkaGbMala-ver-E4896565595FC22E344FD619C0ED15BB.png">&nbsp;English</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" style="max-height: 670px; overflow: hidden; min-height: 0px;"><div class="inner open" role="listbox" id="bs-select-1" tabindex="-1" style="max-height: 660px; overflow-y: auto; min-height: 0px;" aria-activedescendant="bs-select-1-2"><ul class="dropdown-menu inner " role="presentation" style="margin-top: 0px; margin-bottom: 0px;"><li><a role="option" class="dropdown-item" id="bs-select-1-0" tabindex="0" aria-setsize="3" aria-posinset="1"><span class="text"><img src="fiobank_files/VlajkaCzMala-ver-425A2FE80A90297180F0DCC77B3F66B6.png">&nbsp;Czech</span></a></li><li><a role="option" class="dropdown-item" id="bs-select-1-1" tabindex="0" aria-setsize="3" aria-posinset="2"><span class="text"><img src="fiobank_files/VlajkaSkMala-ver-54AA18CD9834A48A7616BB29EA79F102.png">&nbsp;Slovak</span></a></li><li class="selected active"><a role="option" class="dropdown-item active selected" id="bs-select-1-2" tabindex="0" aria-setsize="3" aria-posinset="3" aria-selected="true"><span class="text"><img src="fiobank_files/VlajkaGbMala-ver-E4896565595FC22E344FD619C0ED15BB.png">&nbsp;English</span></a></li></ul></div></div></div>
+		</div>
+	</form>
+</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="h1_login">
+                    Log into Internet Banking
+                </h1>
+                
+                <div class="loginBox">
+                    <form class="form-horizontal" autocomplete="off" id="id8b629c968a878568a" method="post" action="./login?-1.-loginForm&amp;lng=ENGLISH"><div id="id8b629c968a878568a_hf_0" class="hidden-fields" hidden=""></div>
+                        <input type="hidden" value="1971" name="clientTimeDelta" id="ide172b52c834a1e7f7">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="ida695d896733ac4fd1">Username</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" autocomplete="off" name="username" id="ida695d896733ac4fd1">
+                            </div>
+                            <div>
+	<i class="fa fa-keyboard-o fa-lg white" style="cursor: pointer; margin-top: 9px" id="idba0f65928ec4c3e13" data-title="Show / hide virtual keyboard" data-placement="top" aria-label="Show / hide virtual keyboard" data-original-title="" title=""></i><span id="idba0f65928ec4c3e13_tooltipContainer"></span>
+	<div class="virtualKeyboard" style="display: none;" id="id1c3a5434e0f35d6e4">
+		<span class="btn btn-xs closeVK"> <i class="fa fa-times"></i>
+		</span>
+		<ul class="keyboard">
+			<li class="symbol"><span class="off">~</span><span class="on">€</span></li>
+			<li class="symbol"><span class="off">1</span><span class="on">!</span></li>
+			<li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+			<li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+			<li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+			<li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+			<li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+			<li class="symbol"><span class="off">7</span><span class="on amp">&amp;</span></li>
+			<li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+			<li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+			<li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+			<li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+			<li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+			<li class="delete lastitem">delete</li>
+			<li class="letter" style="margin-left: 16px;">ě</li>
+			<li class="letter">š</li>
+			<li class="letter">č</li>
+			<li class="letter">ř</li>
+			<li class="letter">ž</li>
+			<li class="letter">ý</li>
+			<li class="letter">á</li>
+			<li class="letter">í</li>
+			<li class="letter">é</li>
+			<li class="letter">ú</li>
+			<li class="letter">ů</li>
+			<li class="letter">ó</li>
+			<li class="letter">ť</li>
+			<li class="letter">ď</li>
+			<li class="tab">tab</li>
+			<li class="letter">q</li>
+			<li class="letter">w</li>
+			<li class="letter">e</li>
+			<li class="letter">r</li>
+			<li class="letter">t</li>
+			<li class="letter">y</li>
+			<li class="letter">u</li>
+			<li class="letter">i</li>
+			<li class="letter">o</li>
+			<li class="letter">p</li>
+			<li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+			<li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+			<li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+			<li class="capslock">caps lock</li>
+			<li class="letter">a</li>
+			<li class="letter">s</li>
+			<li class="letter">d</li>
+			<li class="letter">f</li>
+			<li class="letter">g</li>
+			<li class="letter">h</li>
+			<li class="letter">j</li>
+			<li class="letter">k</li>
+			<li class="letter">l</li>
+			<li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+			<li class="symbol"><span class="off">'</span><span class="on">"</span></li>
+			<li class="left-shift">shift</li>
+			<li class="letter">z</li>
+			<li class="letter">x</li>
+			<li class="letter">c</li>
+			<li class="letter">v</li>
+			<li class="letter">b</li>
+			<li class="letter">n</li>
+			<li class="letter">m</li>
+			<li class="symbol"><span class="off">,</span><span class="on lt">&lt;</span></li>
+			<li class="symbol"><span class="off">.</span><span class="on gt">&gt;</span></li>
+			<li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+			<li class="right-shift lastitem">shift</li>
+			<li class="space lastitem">&nbsp;</li>
+		</ul>
+	</div>
+</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="id8dd81b1e94e7a9f6b">Password</label>
+                            <div class="col-sm-7">
+                                <div id="id8dd81b1e94e7a9f6b">
+    <div class="input-group">
+        <input type="password" class="form-control secretFieldInput" autocomplete="off" value="" name="password:secretFieldHidden" id="id33fd9c3acf209e0b2">
+        <div class="input-group-addon secretFieldAddon">
+            <i class="fa fa-eye" style="cursor: pointer;" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+                            </div>
+                            <div>
+	<i class="fa fa-keyboard-o fa-lg white" style="cursor: pointer; margin-top: 9px" id="idae3768e01045e9585" data-title="Show / hide virtual keyboard" data-placement="top" aria-label="Show / hide virtual keyboard" data-original-title="" title=""></i><span id="idae3768e01045e9585_tooltipContainer"></span>
+	<div class="virtualKeyboard" style="display: none;" id="idb6932ec82ce65d826">
+		<span class="btn btn-xs closeVK"> <i class="fa fa-times"></i>
+		</span>
+		<ul class="keyboard">
+			<li class="symbol"><span class="off">~</span><span class="on">€</span></li>
+			<li class="symbol"><span class="off">1</span><span class="on">!</span></li>
+			<li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+			<li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+			<li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+			<li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+			<li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+			<li class="symbol"><span class="off">7</span><span class="on amp">&amp;</span></li>
+			<li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+			<li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+			<li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+			<li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+			<li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+			<li class="delete lastitem">delete</li>
+			<li class="letter" style="margin-left: 16px;">ě</li>
+			<li class="letter">š</li>
+			<li class="letter">č</li>
+			<li class="letter">ř</li>
+			<li class="letter">ž</li>
+			<li class="letter">ý</li>
+			<li class="letter">á</li>
+			<li class="letter">í</li>
+			<li class="letter">é</li>
+			<li class="letter">ú</li>
+			<li class="letter">ů</li>
+			<li class="letter">ó</li>
+			<li class="letter">ť</li>
+			<li class="letter">ď</li>
+			<li class="tab">tab</li>
+			<li class="letter">q</li>
+			<li class="letter">w</li>
+			<li class="letter">e</li>
+			<li class="letter">r</li>
+			<li class="letter">t</li>
+			<li class="letter">y</li>
+			<li class="letter">u</li>
+			<li class="letter">i</li>
+			<li class="letter">o</li>
+			<li class="letter">p</li>
+			<li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+			<li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+			<li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+			<li class="capslock">caps lock</li>
+			<li class="letter">a</li>
+			<li class="letter">s</li>
+			<li class="letter">d</li>
+			<li class="letter">f</li>
+			<li class="letter">g</li>
+			<li class="letter">h</li>
+			<li class="letter">j</li>
+			<li class="letter">k</li>
+			<li class="letter">l</li>
+			<li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+			<li class="symbol"><span class="off">'</span><span class="on">"</span></li>
+			<li class="left-shift">shift</li>
+			<li class="letter">z</li>
+			<li class="letter">x</li>
+			<li class="letter">c</li>
+			<li class="letter">v</li>
+			<li class="letter">b</li>
+			<li class="letter">n</li>
+			<li class="letter">m</li>
+			<li class="symbol"><span class="off">,</span><span class="on lt">&lt;</span></li>
+			<li class="symbol"><span class="off">.</span><span class="on gt">&gt;</span></li>
+			<li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+			<li class="right-shift lastitem">shift</li>
+			<li class="space lastitem">&nbsp;</li>
+		</ul>
+	</div>
+</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-4 col-md-3">
+                                <button type="submit" class="btn greenBtn btn-sm" name="p::submit" id="idf7590b5fea68a585c">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-offset-1 col-md-5">
+
+	<h2 class="h2_login">Manage your account easily from your mobile phone</h2>
+
+	<div class="AdloginText Side"><a target="_blank" href="https://www.fio.cz/bank-services/smartbanking?utm_source=ib&amp;utm_medium=side&amp;utm_campaign=sb"><p>Want to keep your account close at hand? Try our clear and intuitive mobile app. Build your own home screen and keep track of your movements. Enter a forgotten payment or change your card limit at any time. And much more.</p></a></div>
+
+	<div class="AdLoginSideSmallImg">
+		<a target="_blank" href="https://www.fio.cz/bank-services/smartbanking?utm_source=ib&amp;utm_medium=side&amp;utm_campaign=sb"> <img src="fiobank_files/Fio_Smartbanking_457x125_en2.png">
+		</a>
+	</div>
+</div>
+        </div>
+
+        
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-md-4">
+
+	<h2 class="h2_login">Safety tips</h2>
+
+	<div class="AdloginText"><a target="_blank" href="https://www.fio.cz/docs/cz/Notice_of_security_risks_when_using_Internetbanking.pdf"><span>While logging in, in the field of internet address should be https://ib.fio.cz/ib/login and under the lock icon you should always find certificate showing you are on the website of Fio banka.</span></a></div>
+
+</div>
+            <div class="col-md-4">
+		
+		<h2 class="h2_login">
+			Contacts
+		</h2>
+		<div class="row">
+			<div class="col-md-7">
+				<strong>Infoline</strong>
+			</div>
+			<div class="col-md-5">
+				224 346 800
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7">
+				<strong>Contact form</strong>
+			</div>
+			<div class="col-md-5">
+				<a href="https://www.fio.cz/about-us/write-to-us"> Write us
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7">
+				<strong>Branches and ATMs</strong>
+			</div>
+			<div class="col-md-5">
+				<a href="http://www.fio.cz/about-us/contacts">List</a><a href="https://ib.fio.cz/ib/login?lng=ENGLISH"> </a>
+			</div>
+		</div>
+	
+		
+	</div>
+            <div class="col-md-4">
+		
+		<h2 class="h2_login">
+			More information
+		</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="http://www.fio.cz/docs/cz/10_Rules_for_secure_use_of_Internetbanking.pdf">10 Rules for secure use of Internet Banking</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="http://www.fio.cz/about-us/documents-pricelist/prices-and-tariffs">Price lists and tariffs</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="http://www.fio.cz/about-us/documents-pricelist/manuals">Technical support, manuals</a>
+			</div>
+		</div>
+	
+		
+	</div>
+        </div>
+        
+
+        
+
+        
+        <div class="row">
+            <div class="col-md-12">
+		
+		<div class="loginFooter text-right">
+			Copyright ©
+			<span>2023</span>
+			Fio banka
+			|
+			<a href="http://www.fio.cz/company-fio/manuals-documents-price-lists/other/legal-disclaimer"><strong>Legal Statement</strong></a>
+			|
+			<a href="http://www.rmsystem.cz/"><strong>RM-SYSTEM</strong></a>
+			|
+			<a href="http://www.akcie.cz/"><strong>AKCIE.CZ</strong></a>
+		</div>
+	
+		
+	</div>
+        </div>
+    </div>
+
+
+</body></html>
