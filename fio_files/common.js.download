@@ -1,0 +1,299 @@
+/* common js stuff */
+$(function () {
+
+    var x = readCookie('eucookie');
+    if (!x) {
+        $("#eucookie").show();
+    }
+    else {
+        $("#eucookie").hide();
+    }
+    $("#eucookie_close").on('click',function (e) {
+        createCookie('eucookie', '1', 365);
+        $("#eucookie").hide();
+    });
+
+    if (typeof $.fn.carousel === 'function') {
+        $(".carousel").carousel({
+            interval: 5000
+        });
+    }
+
+    if (typeof $.fn.tabs === 'function') {
+        jQuery.ui.tabs.prototype._isLocal = ( function() {
+            return function( anchor ) {
+                return true;
+            };
+        })();
+        $("#ebroker-tabs").tabs();
+        $("#prague-stocks-tabs").tabs();
+        $("#prague-stocks-tabs-2").tabs();
+    }
+
+    if (typeof pickmeup === 'function') {
+        pickmeup.defaults.locales['en'] = {
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        };
+        pickmeup.defaults.locales['cs'] = {
+            days: ['Nedìle', 'Pondìlí', 'Úterý', 'Støeda', 'Ètvrtek', 'Pátek', 'Sobota'],
+            daysShort: ['Ne', 'Po', 'Út', 'St', 'Èt', 'Pá', 'So'],
+            daysMin: ['Ne', 'Po', 'Út', 'St', 'Èt', 'Pá', 'So'],
+            months: ['Leden', 'Únor', 'Bøezen', 'Duben', 'Kvìten', 'Èerven', 'Èervenec', 'Srpen', 'Záøí', 'Øíjen', 'Listopad', 'Prosinec'],
+            monthsShort: ["Led", "Úno", "Bøe", "Dub", "Kvì", "Èer", "Èvc", "Srp", "Záø", "Øíj", "Lis", "Pro"]
+        };
+        pickmeup.defaults.locales['sk'] = {
+            days: ["Nede¾a", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"],
+            daysShort: ["Ned", "Pon", "Uto", "Str", "Štv", "Pia", "Sob"],
+            daysMin: ["Ne", "Po", "Ut", "St", "Št", "Pia", "So"],
+            months: ["Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"],
+            monthsShort: ["Jan", "Feb", "Mar", "Apr", "Máj", "Jún", "Júl", "Aug", "Sep", "Okt", "Nov", "Dec"]
+        };
+
+        var pageLng = $("body").data("lng");
+        var locale = "en";
+        if (pageLng == 1) {
+            locale = "cs";
+        }
+        if (pageLng == 3) {
+            locale = "sk";
+        }
+        var elements = document.querySelectorAll('.datepicker');
+        for (var i = 0; i < elements.length; ++i) {
+            pickmeup(elements[i], {
+                format: 'd.m.Y',
+                locale: locale,
+                hide_on_select: true,
+                default_date: false
+            });
+        }
+    }
+
+
+
+    $(".jsHide").addClass("hidden").hide();
+    $(".jsOnly").show();
+    $(".jsOnlyInline-block").css('display', 'inline-block');
+
+    $(".printMe").on('click',function (e) {
+        e.preventDefault();
+        window.print();
+    });
+
+    $("#mapka area").on('mousemove',function () {
+        var offset = ($(this).attr("class")).replace("mapOff", "");
+        mapHover(offset);
+    }).on('mouseout',function () {
+        mapHover(0);
+    });
+
+    $(".barbox-mapka select[name=mapka-kraj]").on('change',function () {
+        window.location = $("#contactsLink").attr("href") + "?region=" + $(this).val() + "#mapBranches";
+    });
+
+    // rozbalovaci casti textu
+    $("div.rollOut").each(function () {
+        $("h2", $(this)).each(function () {
+            var content = $(this).nextUntil("h2");
+            var firstElemIsParagraph = content.eq(0).filter("p").length;
+            if (firstElemIsParagraph) {
+                var p1 = content.eq(0);
+                content = content.filter(":not(p:first)");
+                if (content.length) {
+                    p1.html(p1.html() + '<span class="dots">...</span>' + $("div.showMore").html());
+                    content.wrapAll('<div class="rollOutText" />');
+                }
+            } else if (content.length) {
+                content.eq(0).before($("div.showMore").children().clone());
+                content.wrapAll('<div class="rollOutText" />');
+            }
+        });
+
+        $(".rollOutText", $(this)).each(function () {
+            $(this).html($(this).html() + $("div.hideMore").html());
+        });
+
+    });
+    $("div.rollOutText").hide();
+
+    $(document).on('click', 'a.showMore', function(e) {
+        e.preventDefault();
+        var el = $(this);
+        if ($(this).parent("p").length) {
+            el = el.parent();
+        }
+        el.next(".rollOutText").show();
+        el.find("span.dots").hide();
+        $(this).hide();
+    });
+    $(document).on('click', 'a.hideMore', function(e) {
+        e.preventDefault();
+        var el = $(this).closest("div.rollOutText");
+        el.hide();
+
+        if (el.prev("p").length) {
+            $("span.dots, a.showMore", el.prev("p")).show();
+        } else {
+            el.prev("a.showMore").show();
+        }
+    });
+
+    $(document).on('click', 'a.showHide', function(e) {
+        e.preventDefault();
+        let id = $(this).attr('id').replace('-a', '-b');
+        $('#' + id).toggle();
+    });
+
+    // schovavani formularu u odberu zpravodajstvi
+    $("a.showHideForm").on('click',function (e) {
+        e.preventDefault();
+        var jqEl = $(this).closest("form").find(".verticalForm");
+        if (jqEl.hasClass("hidden")) {
+            jqEl.removeClass("hidden").show();
+        } else {
+            jqEl.addClass("hidden").hide();
+        }
+    });
+
+    // taby - kontakty, stocklist detail, dividendy
+    $(".tabLink").on('click',function (e) {
+        e.preventDefault();
+        var num = $(this).attr("id");
+        num = num.split("-");
+        num = num[1];
+        $(".tabContent").hide();
+        $("#tabContent-" + num).show();
+        $(".tabLink").closest("li").removeClass("active");
+        $(this).closest("li").addClass("active");
+        $(this).trigger('blur');
+    });
+
+    // kontakty velka mapa
+    $(".mapa_points area, .mapa_links a").on('mousemove',function (e) {
+        // $(this).closest(".bigmap").css("border", "1px solid black");
+        var num = $(this).attr("class");
+        num = num.split("-");
+        num = num[1];
+        var jqEl_mapwrap = $(this).closest(".mapwrap"); // jqEl_mapwrap.css("border", "1px solid black");
+        var jqEl_map = jqEl_mapwrap.find(".bigmap");
+        mapa_hover(jqEl_map, num);
+        $(".mapa_links a.bigmapLink-" + num, jqEl_mapwrap).addClass("hover");
+    }).on('mouseout',function (e) {
+        var jqEl_mapwrap = $(this).closest(".mapwrap");
+        var jqEl_map = jqEl_mapwrap.find(".bigmap");
+        $(".mapa_links a", jqEl_mapwrap).removeClass("hover");
+        mapa_hover(jqEl_map, 0);
+    });
+
+    // velka mapa - pobocky (ajax)
+    $(".branches .mapa_points area, .branches .mapa_links a").on('click',function (e) {
+        e.preventDefault();
+        var region = $(this).attr("href");
+        region = region.substr(region.lastIndexOf("region=") + 7);
+        if (region.indexOf("&") != -1) {
+            region = region.substr(0, region.indexOf("&"));
+        }
+        $.post('/ajax/pobocky_region.php', {
+            region: region
+        }, function (data) {
+            $("#branchesListCR table.tbl3 tbody").html(data.htmlBranches);
+            $("#branchesListCR h2.region").html(data.regionName);
+            $(".branches .mapa_links li").removeClass("active");
+            $(".branches .mapa_links li a[href$='region=" + data.regionId + "']").parent().addClass("active");
+            var here = location.protocol + '//' + location.host + location.pathname + location.search;
+            self.location.href = here + '#mapBranches';
+        }, 'json');
+    });
+
+    // velka mapa - bankomaty (ajax)
+    $(".cashmachines .mapa_points area, .cashmachines .mapa_links a").on('click',function (e) {
+        e.preventDefault();
+        var region = $(this).attr("href");
+        region = region.substr(region.lastIndexOf("region=") + 7);
+        if (region.indexOf("&") != -1) {
+            region = region.substr(0, region.indexOf("&"));
+        }
+        $.post('/ajax/bankomaty_region.php', {
+            region: region
+        }, function (data) {
+            $("#cashmachinesListCR .results").html(data.htmlMachines);
+            $("#cashmachinesListCR h2.region").html(data.regionName);
+            $(".cashmachines .mapa_links li").removeClass("active");
+            $(".cashmachines .mapa_links li a[href$='region=" + data.regionId + "']").parent().addClass("active");
+
+            var here = location.protocol + '//' + location.host + location.pathname + location.search;
+            self.location.href = here + '#mapMachines';
+        }, 'json');
+    });
+
+    $(".sideFormKtkBtn").on('click',function (e) {
+        $(this).hide();
+        $(".sideFormKtk").show();
+    });
+    $(".sideFormKtkBtnHide").on('click',function (e) {
+        $(".sideFormKtk").hide();
+        $(".sideFormKtkBtn").show();
+    });
+
+
+    /*
+     * $("#mapa_points area, #mapa_links a").on('mousemove',function(e) { var num = $(this).attr("id"); num = num.split("-"); num = num[1]; mapa_hover(num); $("#mapa_links a#link-"+num).addClass("hover"); }).on('mouseout',function(e) { $("#mapa_links a").removeClass("hover"); mapa_hover(0); }).on('click', function(e) { e.preventDefault(); var region = $(this).attr("href"); region = region.substr(region.lastIndexOf("region=")+7); if (region.indexOf("&") != -1) { region = region.substr(0, region.indexOf("&")); } $.post( '/ajax/pobocky_region.php', {region:region}, function(data) { $("#branchesListCR table.tbl3
+     * tbody").html(data.htmlBranches); $("#branchesListCR h2.region").html(data.regionName); $("#mapa_links li").removeClass("active"); $("#mapa_links li a[href$=region="+data.regionId+"]").parent().addClass("active");
+     *
+     * var here = location.protocol + '//' + location.host + location.pathname + location.search; self.location.href = here + '#mapBranches'; }, 'json' ); } );
+     */
+
+});
+
+// ////////////////////////////////////////
+
+function mapHover(offset) {
+    $("#mapka").css("backgroundPosition", "0 -" + (offset * 103) + "px");
+}
+
+function mapa_hover(jqEl, offset) {
+    jqEl.css("backgroundPosition", "0 -" + (offset * 295) + "px");
+    // $("#mapa").css("backgroundPosition", "0 -"+(offset*295)+"px");
+}
+
+function ajaxInProgress(jq_el) {
+    return jq_el.hasClass("JSdisabled");
+}
+
+function ajaxEnd(jq_el) {
+    jq_el.removeClass("JSdisabled");
+}
+
+function ajaxStart(jq_el) {
+    jq_el.addClass("JSdisabled");
+}
+
+function createCookie(name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else
+        var expires = "";
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+            c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0)
+            return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}

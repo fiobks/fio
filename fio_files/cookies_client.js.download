@@ -1,0 +1,534 @@
+/*
+MIT License
+
+Copyright (c) 2020-2022 Orest Bida
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+// obtain cookieconsent plugin
+//window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+
+var cc = initCookieConsent();
+// microsoft logo
+//var logo = '<svg style="width: 110px; height: 30px; display: block;" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 337.6 72"><path fill="#737373" d="M140.4 14.4v43.2h-7.5V23.7h-.1l-13.4 33.9h-5l-13.7-33.9h-.1v33.9h-6.9V14.4h10.8l12.4 32h.2l13.1-32h10.2zm6.2 3.3c0-1.2.4-2.2 1.3-3 .9-.8 1.9-1.2 3.1-1.2 1.3 0 2.4.4 3.2 1.2s1.3 1.8 1.3 3-.4 2.2-1.3 3c-.9.8-1.9 1.2-3.2 1.2s-2.3-.4-3.1-1.2c-.8-.9-1.3-1.9-1.3-3zm8.1 8.9v31h-7.3v-31h7.3zm22.1 25.7c1.1 0 2.3-.2 3.6-.8 1.3-.5 2.5-1.2 3.6-2v6.8c-1.2.7-2.5 1.2-4 1.5-1.5.3-3.1.5-4.9.5-4.6 0-8.3-1.4-11.1-4.3-2.9-2.9-4.3-6.6-4.3-11 0-5 1.5-9.1 4.4-12.3 2.9-3.2 7-4.8 12.4-4.8 1.4 0 2.8.2 4.1.5 1.4.3 2.5.8 3.3 1.2v7c-1.1-.8-2.3-1.5-3.4-1.9-1.2-.4-2.4-.7-3.6-.7-2.9 0-5.2.9-7 2.8s-2.6 4.4-2.6 7.6c0 3.1.9 5.6 2.6 7.3 1.7 1.7 4 2.6 6.9 2.6zm27.9-26.2a8.08 8.08 0 0 1 2.8.4v7.4c-.4-.3-.9-.6-1.7-.8s-1.6-.4-2.7-.4c-1.8 0-3.3.8-4.5 2.3s-1.9 3.8-1.9 7v15.6h-7.3v-31h7.3v4.9h.1c.7-1.7 1.7-3 3-4 1.4-.9 3-1.4 4.9-1.4zm3.2 16.5c0-5.1 1.5-9.2 4.3-12.2 2.9-3 6.9-4.5 12-4.5 4.8 0 8.6 1.4 11.3 4.3s4.1 6.8 4.1 11.7c0 5-1.5 9-4.3 12-2.9 3-6.8 4.5-11.8 4.5-4.8 0-8.6-1.4-11.4-4.2-2.8-2.9-4.2-6.8-4.2-11.6zm7.6-.3c0 3.2.7 5.7 2.2 7.4s3.6 2.6 6.3 2.6c2.6 0 4.7-.8 6.1-2.6 1.4-1.7 2.1-4.2 2.1-7.6 0-3.3-.7-5.8-2.1-7.6-1.4-1.7-3.5-2.6-6-2.6-2.7 0-4.7.9-6.2 2.7-1.7 1.9-2.4 4.4-2.4 7.7zm35-7.5c0 1 .3 1.9 1 2.5.7.6 2.1 1.3 4.4 2.2 2.9 1.2 5 2.5 6.1 3.9a8.1 8.1 0 0 1 1.8 5.3c0 2.9-1.1 5.2-3.4 7-2.2 1.8-5.3 2.6-9.1 2.6-1.3 0-2.7-.2-4.3-.5-1.6-.3-2.9-.7-4-1.2v-7.2c1.3.9 2.8 1.7 4.3 2.2 1.5.5 2.9.8 4.2.8 1.6 0 2.9-.2 3.6-.7.8-.5 1.2-1.2 1.2-2.3 0-1-.4-1.8-1.2-2.6-.8-.7-2.4-1.5-4.6-2.4-2.7-1.1-4.6-2.4-5.7-3.8s-1.7-3.2-1.7-5.4c0-2.8 1.1-5.1 3.3-6.9 2.2-1.8 5.1-2.7 8.6-2.7 1.1 0 2.3.1 3.6.4s2.5.6 3.4.9V34c-1-.6-2.1-1.2-3.4-1.7-1.3-.5-2.6-.7-3.8-.7-1.4 0-2.5.3-3.2.8-.7.7-1.1 1.4-1.1 2.4zm16.4 7.8c0-5.1 1.5-9.2 4.3-12.2 2.9-3 6.9-4.5 12-4.5 4.8 0 8.6 1.4 11.3 4.3s4.1 6.8 4.1 11.7c0 5-1.5 9-4.3 12-2.9 3-6.8 4.5-11.8 4.5-4.8 0-8.6-1.4-11.4-4.2-2.7-2.9-4.2-6.8-4.2-11.6zm7.6-.3c0 3.2.7 5.7 2.2 7.4s3.6 2.6 6.3 2.6c2.6 0 4.7-.8 6.1-2.6 1.4-1.7 2.1-4.2 2.1-7.6 0-3.3-.7-5.8-2.1-7.6-1.4-1.7-3.5-2.6-6-2.6-2.7 0-4.7.9-6.2 2.7-1.6 1.9-2.4 4.4-2.4 7.7zm48.4-9.7H312v25h-7.4v-25h-5.2v-6h5.2v-4.3c0-3.2 1.1-5.9 3.2-8s4.8-3.1 8.1-3.1c.9 0 1.7.1 2.4.1s1.3.2 1.8.4V18c-.2-.1-.7-.3-1.3-.5-.6-.2-1.3-.3-2.1-.3-1.5 0-2.7.5-3.5 1.4-.8.9-1.2 2.4-1.2 4.2v3.7h10.9v-7l7.3-2.2v9.2h7.4v6h-7.4V47c0 1.9.4 3.2 1 4 .7.8 1.8 1.2 3.3 1.2.4 0 .9-.1 1.5-.3.6-.2 1.1-.4 1.5-.7v6c-.5.3-1.2.5-2.3.7-1.1.2-2.1.3-3.2.3-3.1 0-5.4-.8-6.9-2.4-1.5-1.6-2.3-4.1-2.3-7.4l.1-15.8z"/><path fill="#f25022" d="M0 0h34.2v34.2H0z"/><path fill="#7fba00" d="M37.8 0H72v34.2H37.8z"/><path fill="#00a4ef" d="M0 37.8h34.2V72H0z"/><path fill="#ffb900" d="M37.8 37.8H72V72H37.8z"/></svg>';
+var logo = ''
+var cookie = '?';
+var body = document.getElementsByTagName("body")[0];
+var lng_id =  body.dataset.lng;
+if(lng_id == 1){
+    lng = "cz";
+}else if(lng_id == 2){
+    lng = "en_cz";
+}else if(lng_id == 3){
+    lng = "sk";
+}else{
+    lng = "en_sk";
+}
+
+// function gtag() { dataLayer.push(arguments); }
+
+// run plugin with config object
+cc.run({
+    current_lang : lng,
+    autoclear_cookies : true,                   // default: false
+    theme_css: '/css/cookieconsent.css',
+    //theme_css: '../src/cookieconsent.css',
+    cookie_name: 'cc_cookie',             // default: 'cc_cookie'
+    cookie_expiration : 365,                    // default: 182
+    page_scripts: true,                         // default: false
+
+    // auto_language: null,                     // default: null; could also be 'browser' or 'document'
+    autorun: false,                           // default: true
+    // delay: 0,                                // default: 0
+    // force_consent: false,
+    // hide_from_bots: false,                   // default: false
+    // remove_cookie_tables: false              // default: false
+    // cookie_domain: location.hostname,        // default: current domain
+    // cookie_path: "/",                        // default: root
+    // cookie_same_site: "Lax",
+    // use_rfc_cookie: false,                   // default: false
+    // revision: 0,                             // default: 0
+
+    gui_options: {
+        consent_modal: {
+            layout: 'bar',                      // box,cloud,bar
+            position: 'top center',           // bottom,middle,top + left,right,center
+            transition: 'slide',                 // zoom,slide
+            swap_buttons: true
+        },
+        settings_modal: {
+            layout: 'box',                      // box,bar
+            // position: 'left',                // right,left (available only if bar layout selected)
+            transition: 'slide'                 // zoom,slide
+        }
+    },
+    onFirstAction: function (user_preferences, cookie) {
+        // Disable gtag ...
+        //window.dataLayer = window.dataLayer || [];
+        //function gtag() { dataLayer.push(arguments); }
+
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied'
+            // 'personalization_storage': 'denied',
+            // 'security_storage': 'denied',
+            // 'functionality_storage': 'granted',
+        });
+    },
+
+
+    onAccept: function (cookie) {
+        if (cc.allowedCategory('analytics')) {
+            //window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            //
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+                // 'personalization_storage': 'denied',
+                // 'security_storage': 'denied',
+                // 'functionality_storage': 'granted',
+            });
+
+            // dataLayer.push(
+            //     {
+            //         event: "consent",
+            //         1:"update",
+            //         2:{
+            //             'analytics_storage': 'granted'
+            //             // 'wait_for_update': 2000
+            //         },
+            //     }
+            // );
+        }
+
+        if (!cc.allowedCategory('analytics')) {
+
+            //window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'analytics_storage': 'denied'
+                // 'wait_for_update': 2000
+            });
+        }
+
+        if (cc.allowedCategory('ads')) {
+
+            //window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'ad_storage': 'granted'
+                // 'wait_for_update': 2000
+            });
+        }
+        // If ads category is disabled ...
+        if (!cc.allowedCategory('ads')) {
+
+            //window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'ad_storage': 'denied'
+                // 'wait_for_update': 2000
+            });
+        }
+
+        // gtag('consent', 'update', {
+        //     'ad_storage': 'granted',
+        //     // 'wait_for_update': 2000
+        // });
+        dataLayer.push({
+            event: "consentChange"
+        });
+    },
+
+    onChange: function (cookie, changed_preferences) {
+        // If analytics category's status was changed ...
+        // If analytics category is disabled ...
+        if (cc.allowedCategory('analytics')) {
+
+            // window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                // 'wait_for_update': 2000
+            });
+        }
+
+        if (!cc.allowedCategory('analytics')) {
+
+           // window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'analytics_storage': 'denied',
+                // 'wait_for_update': 2000
+            });
+        }
+
+        if (cc.allowedCategory('ads')) {
+
+             //window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                // 'wait_for_update': 2000
+            });
+        }
+        // If ads category is disabled ...
+        if (!cc.allowedCategory('ads')) {
+
+           // window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                // 'wait_for_update': 2000
+            });
+        }
+
+        dataLayer.push({
+            event: "consentChange"
+        });
+    },
+
+    languages: {
+        'en_cz': {
+            consent_modal: {
+                title: '',
+                description: 'We use cookies to make browsing our website comfortable for you.  By clicking on ÑAcceptì button, you agree to the use of all types of cookies that we use on our website. If you want to allow only certain types of cookies, click on ÑEdit settingsì. You can change your choice at any time by clicking on the link ÑCookie settings ì. You can find out more about cookies <a role="link" href="/company-fio/manuals-documents-price-lists/other/legal-disclaimer">here</a>.',
+                primary_btn: {
+                    text: 'Accept',
+                    role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                },
+                secondary_btn: {
+                    text: 'Edit settings',
+                    role: 'settings'        // 'settings' or 'accept_necessary'
+                }
+            },
+            settings_modal: {
+                title: logo,
+                save_settings_btn: 'SAVE MY SETTINGS',
+                accept_all_btn: 'ALLOW ALL',
+                reject_all_btn: 'REJECT ALL (except necessary)',
+                close_btn_label: 'Close',
+                cookie_table_headers: [
+                    {col1: 'Name'},
+                    {col2: 'Domain'},
+                    {col3: 'Expiration'},
+                    {col4: 'Description'}
+                ],
+                blocks: [
+                    {
+                        title: 'Information on the scope and purpose of cookies processing',
+                        description: 'Cookie is a small block of text file made up of letters and numbers that visited website sends to your browser. It allows the website to record information about your visit, such as preferred language and other settings. This may make your next visit to the website easier and more productive. ' + "</br></br>" +
+                            'Cookies serve a variety of purposes. For example, they enable to save your settings, select relevant ads, or track the number of visitors on the website. <a role="link" href="/company-fio/manuals-documents-price-lists/other/legal-disclaimer">More about cookies</a>'
+                    }, {
+                        title: 'NECESSARY COOKIES',
+                        description: 'These cookies are necessary for proper functioning of our website and they cannot be turned off.',
+                        toggle: {
+                            value: 'functionality',
+                            enabled: true,
+                            readonly: true          // cookie categories with readonly=true are all treated as "functionality cookies"
+                        }
+                    }, {
+                        title: 'ANALYTICAL COOKIES',
+                        description: 'These cookies collect information about how you use the website, which pages you have visited and which links you have clicked on. All the data is anonymized and cannot be used to identify you.',
+                        toggle: {
+                            value: 'analytics',     // there are no default categories => you specify them
+                            enabled: false,
+                            readonly: false
+                        }
+                    }, {
+                        title: 'MARKETING COOKIES',
+                        description: 'These cookies connect our website with advertising systems and social networks such as Google Ads, Facebook, etc. Thanks to this, we can display you literally tailored advertising.',
+                        toggle: {
+                            value: 'ads',
+                            enabled: false,
+                            readonly: false
+                        }
+                    }
+                ]
+            }
+        },'cz': {
+            consent_modal: {
+                title: '',
+                description: 'Aby prohlÌûenÌ naöeho webu bylo pro V·s komfortnÌ, vyuûÌv·me soubory cookies. KliknutÌm na tlaËÌtko "SouhlasÌm" odsouhlasÌte vyuûitÌ vöech typ˘ cookies, kterÈ na naöem webu pouûÌv·me. Pokud chcete povolit jen nÏkterÈ typy cookies, kliknÏte na "Upravit nastavenÌ". Svou volbu m˘ûete kdykoli zmÏnit kliknutÌm na odkaz ÑNastavenÌ cookiesì. VÌce o cookies zjistÌte <a role="link" href="/spolecnost-fio/manualy-dokumenty-ceniky/ostatni/pravni-prohlaseni">zde</a>.',
+                primary_btn: {
+                    text: 'SouhlasÌm',
+                    role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                },
+                secondary_btn: {
+                    text: 'Upravit nastavenÌ',
+                    role: 'settings'        // 'settings' or 'accept_necessary'
+                }
+            },
+            settings_modal: {
+                title: logo,
+                save_settings_btn: 'ULOéIT MOJE NASTAVENÕ',
+                accept_all_btn: 'POVOLIT VäE',
+                reject_all_btn: 'ODMÕTNOUT VäE (kromÏ nezbytn˝ch)',
+                close_btn_label: 'Close',
+                cookie_table_headers: [
+                    {col1: 'Name'},
+                    {col2: 'Domain'},
+                    {col3: 'Expiration'},
+                    {col4: 'Description'}
+                ],
+                blocks: [
+                    {
+                        title: 'Informace o rozsahu a ˙Ëelu zpracov·nÌ cookies',
+                        description: 'Cookie je kr·tk˝ textov˝ soubor tvo¯en˝ pÌsmeny a ËÌslicemi, kter˝ navötÌven· webov· str·nka odeöle do prohlÌûeËe. UmoûÚuje webu zaznamenat informace o vaöÌ n·vötÏvÏ, nap¯Ìklad preferovan˝ jazyk a dalöÌ nastavenÌ. Vaöe p¯ÌötÌ n·vötÏva str·nek tak m˘ûe b˝t snazöÌ a produktivnÏjöÌ. ' +
+                            'Soubory cookie slouûÌ k celÈ ¯adÏ ˙Ëel˘. Nap¯Ìklad k ukl·d·nÌ vaöich nastavenÌ, k v˝bÏru relevantnÌch reklam Ëi ke sledov·nÌ poËtu n·vötÏvnÌk˘ na str·nce. <a role="link" href="/spolecnost-fio/manualy-dokumenty-ceniky/ostatni/pravni-prohlaseni">VÌce o cookies</a>.'
+                    }, {
+                        title: 'NEZBYTN¡ COOKIES',
+                        description: 'Tyto cookies jsou nezbytnÈ pro spr·vnÈ fungov·nÌ naöich internetov˝ch str·nek a nenÌ moûnÈ je vypnout.',
+                        toggle: {
+                            value: 'functionality',
+                            enabled: true,
+                            readonly: true          // cookie categories with readonly=true are all treated as "functionality cookies"
+                        }
+                    }, {
+                        title: 'ANALYTICK¡ COOKIES',
+                        description: 'Tyto cookies shromaûÔujÌ informace o tom, jak web pouûÌv·te, kterÈ str·nky jste navötÌvili, a na kterÈ odkazy jste klikli. Vöechna data jsou anonymizov·na a nelze je pouûÌt k vaöÌ identifikaci.',
+                        toggle: {
+                            value: 'analytics',     // there are no default categories => you specify them
+                            enabled: false,
+                            readonly: false
+                        }
+                    }, {
+                        title: 'MARKETINGOV¡ COOKIES',
+                        description: 'Tyto cookies propojujÌ n·ö web s reklamnÌmi systÈmy a soci·lnÌmi sÌtÏmi jako Google Ads, Facebook apod. DÌky tomu v·m m˘ûeme zobrazovat reklamu doslova na mÌru.',
+                        toggle: {
+                            value: 'ads',
+                            enabled: false,
+                            readonly: false
+                        }
+                    }
+                ]
+            }
+        },
+        'en_sk': {
+            consent_modal: {
+                title: '',
+                description: 'We use cookies to make browsing our website comfortable for you.  By clicking on ÑAcceptì button, you agree to the use of all types of cookies that we use on our website. If you want to allow only certain types of cookies, click on ÑEdit settingsì. You can change your choice at any time by clicking on the link ÑCookie settings ì. You can find out more about cookies <a role="link" href="/company-fio/manuals-documents-price-lists/other/legal-disclaimer">here</a>.',
+                primary_btn: {
+                    text: 'Accept',
+                    role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                },
+                secondary_btn: {
+                    text: 'Edit settings',
+                    role: 'settings'        // 'settings' or 'accept_necessary'
+                }
+            },
+            settings_modal: {
+                title: logo,
+                save_settings_btn: 'SAVE MY SETTINGS',
+                accept_all_btn: 'ALLOW ALL',
+                reject_all_btn: 'REJECT ALL (except necessary)',
+                close_btn_label: 'Close',
+                cookie_table_headers: [
+                    {col1: 'Name'},
+                    {col2: 'Domain'},
+                    {col3: 'Expiration'},
+                    {col4: 'Description'}
+                ],
+                blocks: [
+                    {
+                        title: 'Information on the scope and purpose of cookies processing',
+                        description: 'Cookie is a small block of text file made up of letters and numbers that visited website sends to your browser. It allows the website to record information about your visit, such as preferred language and other settings. This may make your next visit to the website easier and more productive. ' + "</br></br>" +
+                            'Cookies serve a variety of purposes. For example, they enable to save your settings, select relevant ads, or track the number of visitors on the website. <a role="link" href="/company-fio/manuals-documents-price-lists/other/legal-disclaimer">More about cookies</a>'
+                    }, {
+                        title: 'NECESSARY COOKIES',
+                        description: 'These cookies are necessary for proper functioning of our website and they cannot be turned off.',
+                        toggle: {
+                            value: 'functionality',
+                            enabled: true,
+                            readonly: true          // cookie categories with readonly=true are all treated as "functionality cookies"
+                        }
+                    }, {
+                        title: 'ANALYTICAL COOKIES',
+                        description: 'These cookies collect information about how you use the website, which pages you have visited and which links you have clicked on. All the data is anonymized and cannot be used to identify you.',
+                        toggle: {
+                            value: 'analytics',     // there are no default categories => you specify them
+                            enabled: false,
+                            readonly: false
+                        }
+                    }, {
+                        title: 'MARKETING COOKIES',
+                        description: 'These cookies connect our website with advertising systems and social networks such as Google Ads, Facebook, etc. Thanks to this, we can display you literally tailored advertising.',
+                        toggle: {
+                            value: 'ads',
+                            enabled: false,
+                            readonly: false
+                        }
+
+                    }
+                ]
+            }
+        },'sk': {
+            consent_modal: {
+                title: '',
+                description: 'Aby prehliadanie n·öho webu bolo pre V·s komfortnÈ, vyuûÌvame s˙bory cookies. KliknutÌm na tlaËidlo "S˙hlasÌm" ods˙hlasÌte vyuûitie vöetk˝ch typov cookies, ktorÈ na naöom webe pouûÌvame. Pokiaæ chcete povoliù len niektorÈ typy cookies, kliknite na "Upraviù nastavenia". Svoju voæbu mÙûete kedykoævek zmeniù kliknutÌm na odkaz ÑNastavenie cookiesì. Viac o cookies zistÌte <a role="link" href="/spolocnost-fio/manualy-dokumenty-cenniky/ostatne/pravne-prehlasenie">tu</a>.',
+                primary_btn: {
+                    text: 'S˙hlasÌm',
+                    role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                },
+                secondary_btn: {
+                    text: 'Upraviù nastavenie',
+                    role: 'settings'        // 'settings' or 'accept_necessary'
+                }
+            },
+            settings_modal: {
+                title: logo,
+                save_settings_btn: 'ULOéIç MOJE NASTAVENIA',
+                accept_all_btn: 'POVOLIç VäETKO',
+                reject_all_btn: 'ODMIETNUç VäETKO (okrem nevyhnutn˝ch)',
+                close_btn_label: 'Close',
+                cookie_table_headers: [
+                    {col1: 'Name'},
+                    {col2: 'Domain'},
+                    {col3: 'Expiration'},
+                    {col4: 'Description'}
+                ],
+                blocks: [
+                    {
+                        title: 'Inform·cie o rozsahu a ˙Ëele spracovania cookies',
+                        description: 'Cookie je kr·tky textov˝ s˙bor tvoren˝ pÌsmenami a ËÌslicami, ktor˝ navötÌven· webov· str·nka odoöle do prehliadaËa. UmoûÚuje webu zaznamenaù inform·cie o vaöej n·vöteve, naprÌklad preferovan˝ jazyk a Ôalöie nastavenia. Vaöa bud˙ca n·vöteva str·nok tak mÙûe byù jednoduchöia a produktÌvnejöia.' + "</br>" +
+                            'S˙bory cookie sl˙ûia na cel˝ rad ˙Ëelov. NaprÌklad na ukladanie vaöich nastavenÌ, na v˝ber relevantn˝ch rekl·m alebo na sledovanie poËtu n·vötevnÌkov na str·nke. <a role="link" href="/spolocnost-fio/manualy-dokumenty-cenniky/ostatne/pravne-prehlasenie">Viac o cookies</a>.'
+                    }, {
+                        title: 'NEVYHNUTN… COOKIES ',
+                        description: 'Tieto cookies s˙ nevyhnutnÈ pre spr·vne fungovanie naöich internetov˝ch str·nok a nie je moûnÈ ich vypn˙ù.',
+                        toggle: {
+                            value: 'functionality',
+                            enabled: true,
+                            readonly: true          // cookie categories with readonly=true are all treated as "functionality cookies"
+                        }
+                    }, {
+                        title: 'ANALYTICK… COOKIES ',
+                        description: 'Tieto cookies zhromaûÔuj˙ inform·cie o tom, ako web pouûÌvate, ktorÈ str·nky ste navötÌvili, a na ktorÈ odkazy ste klikli. Vöetky ˙daje s˙ anonymizovanÈ a nemoûno ich pouûiù na vaöu identifik·ciu.',
+                        toggle: {
+                            value: 'analytics',     // there are no default categories => you specify them
+                            enabled: false,
+                            readonly: false
+                        },
+                        cookie_table: [             // list of all expected cookies
+                            {
+                                col1: '^_ga',       // match all cookies starting with "_ga"
+                                col2: 'google.com',
+                                col3: '2 roky',
+                                col4: 'Soubor cookie _ga, instalovan˝ sluûbou Google Analytics, vypoËÌt·v· ˙daje o n·vötÏvnÌcÌch, relacÌch a kampanÌch a takÈ sleduje pouûÌv·nÌ webu pro analytickou zpr·vu webu. Soubor cookie ukl·d· informace anonymnÏ a k rozpozn·nÌ jedineËn˝ch n·vötÏvnÌk˘ p¯i¯azuje n·hodnÏ vygenerovanÈ ËÌslo.',
+                                is_regex: true
+                            },
+                            {
+                                col1: '_gid',
+                                col2: 'google.com',
+                                col3: '1 den',
+                                col4: 'Soubor cookie _gid, instalovan˝ sluûbou Google Analytics, ukl·d· informace o tom, jak n·vötÏvnÌci pouûÌvajÌ webovÈ str·nky, a z·roveÚ vytv·¯Ì analytickou zpr·vu o v˝konu webov˝ch str·nek. Mezi shromaûÔovanÈ ˙daje pat¯Ì poËet n·vötÏvnÌk˘, jejich zdroj a anonymnÏ navötÌvenÈ str·nky.',
+                            },
+                            {
+                                col1: 'gat',
+                                col2: 'google.com',
+                                col3: '1 minuta',
+                                col4: 'Tento soubor cookie neukl·d· û·dnÈ informace o uûivateli, slouûÌ pouze k omezenÌ poËtu poûadavk˘, kterÈ musÌ b˝t odesl·ny na web doubleclick.net.',
+                            }
+                        ]
+                    }, {
+                        title: 'MARKETINGOV… COOKIES',
+                        description: 'Tieto cookies prep·jaj˙ n·ö web s reklamn˝mi systÈmami a soci·lnymi sieùami ako Google Ads, Facebook a pod. VÔaka tomu v·m mÙûeme zobrazovaù reklamu doslova na mieru.',
+                        toggle: {
+                            value: 'ads',
+                            enabled: false,
+                            readonly: false
+                        },
+                        cookie_table: [             // list of all expected cookies
+                            {
+                                col1: 'sid',       // match all cookies starting with "_ga"
+                                col2: 'seznam.cz',
+                                col3: '30 dnÌ',
+                                col4: 'Seznam.cz retargeting',
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+});
+
+
+var s_bns = document.getElementById('s-bns');
+var s_all_bn = document.getElementById('s-all-bn');
+var s_rall_bn = document.getElementById('s-rall-bn');
+var s_sv_bn = document.getElementById('s-sv-bn');
+s_bns.id = "s-bns-n";
+s_bns.innerHTML = "";
+
+s_bns.append(s_rall_bn);
+s_bns.append(s_sv_bn);
+s_bns.append(s_all_bn);
+
+var modal = document.getElementById("cm");
+
+if(modal) {
+    var close_btn = document.getElementById('s-c-bn')
+    close_btn.blur();
+
+    var div = document.createElement('div');
+    div.id = "closeBtnCon";
+
+    var btn = document.createElement("button");
+    btn.id = "closeBtn";
+    btn.setAttribute("type", "button");
+    btn.className = "c-bn";
+    btn.setAttribute("aria-label", "Close")
+
+    div.append(btn);
+
+
+    modal.insertBefore(div, modal.firstChild);
+
+    var _addEvent = function (elem, event, fn, _passive) {
+        var passive = _passive === true;
+
+        if (elem.addEventListener) {
+            passive ? elem.addEventListener(event, fn, {passive: true}) : elem.addEventListener(event, fn, false);
+        } else {
+            /**
+             * For old browser, add 'on' before event:
+             * 'click':=> 'onclick'
+             */
+            elem.attachEvent("on" + event, fn);
+        }
+    }
+
+    _addEvent(btn, 'click', function () {
+        cc.hide();
+        cc.accept([]); // accept necessary only
+    });
+}
+
+if(navigator.cookieEnabled) {
+    cc.show();
+}
+

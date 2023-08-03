@@ -1,0 +1,13 @@
+hr {display:none}
+img {border:0}
+#headline {display:none}
+#bar {display:none}
+#header .search {display:none}
+#header hr {display:block}
+#header .tophead {display:none}
+#header .tophead a {text-decoration:none;color:black}
+.symbol {display:none}
+.rightcol {display:none}
+.crumbs {display:none}
+#footer .links {display:none}
+.paginator .part2 {display:none}
